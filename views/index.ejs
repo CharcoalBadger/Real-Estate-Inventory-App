@@ -1,0 +1,35 @@
+<h1>Available Rentals</h1>
+<a href="/new">Add New Listing</a>
+
+<ul>
+    <% if (properties && properties.length> 0) { %>
+        <% properties.forEach(property=> { %>
+            <li>
+                <strong>
+                    <%= property.title %>
+                </strong> - $<%= property.price %>
+                    <br> <em>Category:</em>
+                    <%= property.category %>
+                        <form action="/delete/<%= property.id %>" method="POST"
+                            onsubmit="return confirm('Are you sure?');">
+                            <button type="submit">Delete</button>
+                        </form>
+            </li>
+            <% }); %>
+                <% } else { %>
+                    <p>No properties available.</p>
+                    <% } %>
+</ul>
+
+<h2>Filter by Category</h2>
+<ul>
+    <% if (categories && categories.length> 0) { %>
+        <% categories.forEach(category=> { %>
+            <li><a href="/category/<%= category.id %>">
+                    <%= category.name %>
+                </a></li>
+            <% }); %>
+                <% } else { %>
+                    <p>No categories available.</p>
+                    <% } %>
+</ul>
